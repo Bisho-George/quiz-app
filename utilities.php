@@ -9,6 +9,7 @@ function is_authenticated()
 {
     session_start();
 
-    // Check if the user is logged in
-    return (isset($_SESSION['username']));
+    if (!isset($_SESSION['username'])) return FALSE;
+
+    return username_exists($_SESSION['username']);
 }
