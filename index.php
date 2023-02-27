@@ -2,4 +2,8 @@
 
 require_once "utilities.php";
 
-redirect('login.php');
+if (is_authenticated()) {
+    header('Location: dashboard.php');
+} else {
+    header('Location: login.php');
+}
