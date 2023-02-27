@@ -1,6 +1,17 @@
 <?php
 
 require_once  __DIR__."/../connection.php";
+
+function email_exists($email)
+{
+    global $conn;
+
+    $query = "SELECT * FROM users WHERE email = '$email';";
+    $result = mysqli_query($conn, $query);
+
+    return mysqli_num_rows($result) > 0;
+}
+
     global $conn;
 
     $query = "SELECT * FROM users;";
