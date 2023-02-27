@@ -21,13 +21,13 @@
         ?>
     </p>
     <form action="routes/auth/register.php" method="post">
-        <input type="text" placeholder="username" name="username" value="<?php
+        <input required type="text" placeholder="username" name="username" value="<?php
             key_exists('username', $_GET) ? print $_GET['username'] : print '';
         ?>">
-        <input type="email" placeholder="email"name="email" value="<?php 
+        <input required type="email" placeholder="email"name="email" value="<?php 
             key_exists('email', $_GET) ? print $_GET['email'] : print '';
         ?>">
-        <input type="password" placeholder="password" name="password">
+        <input required type="password" placeholder="password" name="password">
         <button type="submit">register</button>
     </form>
     <a href="login.php">already have an account? click here to login.</a>
