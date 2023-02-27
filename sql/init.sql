@@ -4,7 +4,7 @@ USE quiz;
 create TABLE users (
     username varchar(50) primary key,
     email varchar(100) not null,
-    password varchar(255) not null
+    passwd varchar(255) not null
 );
 CREATE TABLE quizzes (
     id INT NOT NULL AUTO_INCREMENT,
