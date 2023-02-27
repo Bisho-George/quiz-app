@@ -12,6 +12,18 @@ function email_exists($email)
     return mysqli_num_rows($result) > 0;
 }
 
+function username_exists($username)
+{
+    global $conn;
+
+    $query = "SELECT * FROM users WHERE username = '$username';";
+    $result = mysqli_query($conn, $query);
+
+    return mysqli_num_rows($result) > 0;
+}
+
+function select_all_users()
+{
     global $conn;
 
     $query = "SELECT * FROM users;";
