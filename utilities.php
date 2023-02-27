@@ -1,9 +1,6 @@
 <?php
 
-function redirect($url) {
-    header('Location: '.$url);
-    exit();
-}
+require_once "database/functions/users_functions.php";
 
 function is_authenticated()
 {
