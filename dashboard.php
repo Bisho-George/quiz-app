@@ -19,7 +19,10 @@ if (!is_authenticated()) {
 </head>
 
 <body>
-    Hey
+    <h2>
+        Hey, <?php print $_SESSION['username'] ?>
+    </h2>
+    <a href="create_quiz.php">Create a quiz</a>
 </body>
 
 </html>
