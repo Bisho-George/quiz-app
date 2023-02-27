@@ -1,6 +1,6 @@
 <?php
 
-function select_all_users() {
+require_once  __DIR__."/../connection.php";
     global $conn;
 
     $query = "SELECT * FROM users;";
