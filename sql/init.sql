@@ -9,7 +9,7 @@ create TABLE users (
 CREATE TABLE quizzes (
     id INT NOT NULL AUTO_INCREMENT,
     title varchar(255) not null,
-    description_ text,
+    descr text,
     username varchar(50) not null,
     PRIMARY KEY (id),
     foreign key (username) references users(username)
