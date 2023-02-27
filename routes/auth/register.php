@@ -39,6 +39,7 @@ if (email_exists($email)) {
 // Create the new user
 insert_user($username, $email, $password);
 
+ini_set( 'session.cookie_httponly', 1 );
 session_start();
 
 $_SESSION["username"] = $username;
