@@ -1,6 +1,9 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
-require_once "database_connection.php";
+require_once "utilities.php";
 
-echo "Hello";
+if (is_authenticated()) {
+    header('Location: dashboard.php');
+} else {
+    header('Location: login.php');
+}
