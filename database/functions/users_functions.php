@@ -1,6 +1,6 @@
 <?php
 
-function get_all_users() {
+function select_all_users() {
     global $conn;
 
     $query = "SELECT * FROM users;";
@@ -9,7 +9,7 @@ function get_all_users() {
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function create_new_user($username, $email, $password) {
+function insert_user($username, $email, $password) {
     global $conn;
 
     $query = "INSERT INTO users (username, email, passwd) VALUES ('$username', '$email', '$password');";

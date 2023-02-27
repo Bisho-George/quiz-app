@@ -2,7 +2,7 @@
 
 require_once 'database_connection.php';
 
-function get_all_questions() {
+function select_all_questions() {
     global $conn;
 
     $query = "SELECT * FROM questions;";
@@ -11,7 +11,7 @@ function get_all_questions() {
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function insert_new_question($question, $question_type, $quiz_id) {
+function insert_question($question, $question_type, $quiz_id) {
     global $conn;
 
     $query = "INSERT INTO questions (question, question_type, quiz_id) VALUES ('$question', '$question_type', $quiz_id);";
