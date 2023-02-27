@@ -1,6 +1,6 @@
 <?php
 
-require_once 'database_connection.php';
+require_once  __DIR__."/../connection.php";
 
 function select_all_questions() {
     global $conn;

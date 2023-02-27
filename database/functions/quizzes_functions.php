@@ -1,5 +1,7 @@
 <?php
 
+require_once  __DIR__."/../connection.php";
+
 function select_all_quizzes() {
     global $conn;
 
