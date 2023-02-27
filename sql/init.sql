@@ -2,15 +2,16 @@ DROP DATABASE IF EXISTS quiz;
 CREATE DATABASE quiz;
 USE quiz;
 create TABLE users (
-    username varchar(50) primary key,
-    email varchar(100) not null,
-    password varchar(255) not null
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    passwd VARCHAR(100) NOT NULL,
+    PRIMARY KEY (username)
 );
 CREATE TABLE quizzes (
     id INT NOT NULL AUTO_INCREMENT,
-    title varchar(255) not null,
-    description_ text,
-    username varchar(50) not null,
+    title VARCHAR(255) NOT NULL,
+    descr TEXT OPTIONAL,
+    username VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
     foreign key (username) references users(username)
 );
