@@ -4,12 +4,12 @@ USE quiz;
 create TABLE users (
     username varchar(50) primary key,
     email varchar(100) not null,
-    password varchar(255) not null
+    passwd varchar(255) not null
 );
 CREATE TABLE quizzes (
     id INT NOT NULL AUTO_INCREMENT,
     title varchar(255) not null,
-    description_ text,
+    descr text,
     username varchar(50) not null,
     PRIMARY KEY (id),
     foreign key (username) references users(username)
