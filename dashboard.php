@@ -3,7 +3,8 @@
 require_once "utilities.php";
 
 if (!is_authenticated()) {
-    redirect('index.php');
+    header('Location: index.php');
+    exit();
 }
 
 ?>
