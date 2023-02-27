@@ -10,12 +10,7 @@
 <body>
     <p>
         <?php 
-            $error_messsages = array(
-                'emptyFields' => 'Please fill out all the fields',
-                'invalidEmail' => 'Please enter a valid email address',
-                'usernameTaken' => 'This usersname is used by another user, please try another',
-                'emailTaken' => 'This email is used by another user, please try another'
-            );
+            require_once "utilities.php";
 
             key_exists('error', $_GET) ? print $error_messsages[$_GET['error']] : print '';
         ?>
