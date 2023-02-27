@@ -32,6 +32,16 @@ function select_all_users()
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
+function select_user_by_username_and_password($username, $password)
+{
+    global $conn;
+
+    $query = "SELECT * FROM users WHERE username = '$username' AND passwd = '$password'";
+    $result = mysqli_query($conn, $query);
+
+    return mysqli_fetch_assoc($result);
+}
+
 function insert_user($username, $email, $password)
 {
     global $conn;
