@@ -1,6 +1,7 @@
 CREATE TABLE quizzes (
-    id auto_increment varchar(100) primary key,
+    id  INT primary key auto_increment,
+    username varchar(50) not null,
     title varchar(255) not null,
     _description text,
-    foreign key (user_id) references users(username)
+    foreign key (username) references users(username)
 );
