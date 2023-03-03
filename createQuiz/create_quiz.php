@@ -3,52 +3,34 @@
 require_once "../utilities.php";
 
 if (!is_authenticated()) {
-    header('Location: ../index.php');
+    header('Location: index.php');
     exit();
 }
 
 ?>
 
-<form action="../routes/quizzes/process_quiz.php" method="POST">
-    <label for="title">Quiz title:</label>
-    <input type="text" id="title" name="quiz[title]" required><br>
+<html lang="en">
 
-    <label for="description">Quiz description:</label>
-    <textarea id="description" name="quiz[description]"></textarea><br>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a quiz</title>
+</head>
 
-    <div id="questions">
-        <h2>Questions:</h2>
-        <button type="button" id="add-question">Add question</button>
-        <br><br>
-
-        <!-- Template for new question -->
-        <template id="question-template">
-            <div class="question">
-                <h3>Question <span class="question-number"></span>:</h3>
-                <label for="question-text">Question text:</label>
-                <input type="text" name="quiz[questions][{{index}}][text]" required>
-                <br>
-
-                <label for="answer-options">Answer options:</label><br>
-                <div id="answer-options">
-                    <!-- Template for new answer option -->
-                    <template id="answer-template">
-                        <label for="answer-{{index}}">Answer {{index}}:</label>
-                        <input type="text" name="quiz[questions][{{qIndex}}][answers][]" required>
-                        <input type="radio" name="quiz[questions][{{qIndex}}][correctIndex]" value="{{aIndex}}" required>
-                        <br>
-                    </template>
-                </div>
-                <button type="button" class="add-answer">Add answer option</button>
-                <br><br>
-            </div>
-        </template>
-    </div>
-
-    <button type="submit">Create quiz</button>
-</form>
-
-<script src="create_quiz.js"></script>
+<body>
+    <h1>Create a quiz</h1>
+    <form action="../routes/quizzes/create.php" method="post">
+        <input type="text" name="title" placeholder="quiz title">
+        <textarea name="descr" cols="30" rows="10" placeholder="quiz description"></textarea>
+        <div>
+            <ul id="questions"></ul>
+            <button id="addQuestion">add question</button>
+        </div>
+        <button type="submit">create</button>
+    </form>
+    <script src="./create_quiz.js"></script>
+    </script>
 </body>
 
 </html>
