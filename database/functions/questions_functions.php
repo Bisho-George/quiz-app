@@ -11,11 +11,11 @@ function select_all_questions() {
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function insert_question($question, $question_type, $quiz_id) {
+function insert_question($question, $quiz_id) {
     global $conn;
 
-    $query = "INSERT INTO questions (question, question_type, quiz_id) VALUES ('$question', '$question_type', $quiz_id);";
+    $query = "INSERT INTO questions (question, quiz_id) VALUES ('$question', $quiz_id);";
     $result = mysqli_query($conn, $query);
 
-    return $result;
+    return mysqli_insert_id($conn);
 }

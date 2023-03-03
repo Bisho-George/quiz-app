@@ -17,5 +17,5 @@ function insert_quiz($title, $descr, $username) {
     $query = "INSERT INTO quizzes (title, descr, username) VALUES ('$title', '$descr', '$username');";
     $result = mysqli_query($conn, $query);
 
-    return $result;
+    return mysqli_insert_id($conn);
 }
