@@ -4,6 +4,7 @@ function questionElement() {
     const div = document.createElement('div');
 
     const input = document.createElement('input');
+    input.name = `questions[${questionIndex}][question]`;
 
     const answers = document.createElement('div');
 
@@ -19,8 +20,10 @@ function questionElement() {
         const pair = document.createElement('div');
         const radio = document.createElement('input');
         radio.type = 'radio';
+        radio.name = `questions[${questionIndex}][correct_answer]`;
         radio.value = answerIndex;
         const answer = document.createElement('input');
+        answer.name = `questions[${questionIndex}][answers][${answerIndex}]`;
         pair.appendChild(radio);
         pair.appendChild(answer);
         answers.appendChild(pair);
