@@ -28,7 +28,18 @@ foreach ($questions as $question) {
     $question_id = insert_question($title, $quiz_id);
 
     $correct_answer = $question['correct_answer']; 
+    
+    if (!isset($question['answers']) || !is_array($question['answers'])) {
+        echo "Invalid answers";
+        exit();
+    }
+
     $answers = $question['answers'];
+
+    if (count($answers) < 2) {
+        echo "Less than 2 answers";
+        exit();
+    }
 
     foreach ($answers as $index => $answer) {
         insert_answer($answer, $question_id, $correct_answer == $index ? 1 : 0);
