@@ -18,7 +18,6 @@ CREATE TABLE quizzes (
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
     question VARCHAR(255) NOT NULL,
-    question_type ENUM('mcq', 'tf') NOT NULL,
     quiz_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (quiz_id) REFERENCES quizzes(id)
@@ -27,6 +26,7 @@ CREATE TABLE answers(
     id INT NOT NULL AUTO_INCREMENT,
     answer VARCHAR(255) NOT NULL,
     question_id INT NOT NULL,
+    is_correct BOOLEAN NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );

@@ -2,31 +2,80 @@
 
 error_log(print_r($_POST, true));
 
-/*
-(
-    [title] => egypt
-    [descr] => quiz about egypt
-    [question-1] => what is capital?
-    [question-1-type] => mcq
-    [question-1-correct-answer] => question-1-answer-1
-    [question-1-answer-1] => cairo
-    [question-1-answer-2] => giza
-    [question-1-answer-3] => alex
-    [question-2] => egypt poor.
-    [question-2-type] => tf
-    [question-2-correct-answer] => question-2-answer-1
-    [question-2-answer-1] => True
-    [question-2-answer-2] => False
-)
-*/
+require_once "../../utilities.php";
 
-$descr = isset($_POST['descr']) ? $_POST['descr'] : '';
+require_once "../../database/functions/quizzes_functions.php";
+require_once "../../database/functions/questions_functions.php";
+require_once "../../database/functions/answers_functions.php";
+
+if (!is_authenticated()) {
+    echo "You are not authenticated";
+    exit();
+}
+error_log(print_r($_POST, true));
+$username = $_SESSION['username'];
+
 
 if (!isset($_POST['title'])) {
-    header('Location: create_quiz.php?error=emptyFields');
+    echo "title is not set";
+    exit();
+}
+$title = $_POST['title'];
+if (empty($title)) {
+    echo "Title is empty";
+    exit();
+}
+if (!isset($_POST['descr'])) {
+    echo "descr is not set";
+    exit();
+}
+$descr = $_POST['descr'];
+if (empty($descr)) {
+    echo "descr is empty";
+    exit();
+}
+$quiz_id = insert_quiz($title, $descr, $username);
+if (!$quiz_id) {
+    echo "Failed to insert quiz";
+    exit();
+}
+if (!isset($_POST['questions'])) {
+    echo "questions is not set";
+    exit();
+}
+$questions = $_POST['questions'];
+if (empty($questions)) {
+    echo "questions is empty";
+    exit();
+} else {
+    foreach ($questions as $question) {
+        $title = $question['question'];
+
+        $question_id = insert_question($title, $quiz_id);
+        if (!isset($question['correct_answer'])) {
+            echo "correct_answer is not set";
+            exit();
+        }
+        $correct_answer = $question['correct_answer'];
+        if (empty($question['correct_answer'])) {
+            echo "correct_answer is empty";
+            exit();
+        }
+        $answers = $question['answers'];
+
+        foreach ($answers as $index => $answer) {
+            insert_answer($answer, $question_id, $correct_answer == $index ? 1 : 0);
+        }
+    }
+}
+if (!isset($_POST['answers'])) {
+    echo "answers is not set";
+    exit();
+}
+$answers = $_POST['answers'];
+if (empty($answers)) {
+    echo "answers is empty";
     exit();
 }
 
-$title = $_POST['title'];
-
-// TODO: Read the questions and answers from the $_POST array and create the quiz in the database
+header('Location: ../../dashboard.php');

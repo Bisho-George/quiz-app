@@ -22,7 +22,7 @@ if (!is_authenticated()) {
     <h2>
         Hey, <?php print $_SESSION['username'] ?>
     </h2>
-    <a href="create_quiz.php">Create a quiz</a>
+    <a href="createQuiz/create_quiz.php">Create a quiz</a>
 </body>
 
 </html>
