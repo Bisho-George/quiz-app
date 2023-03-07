@@ -70,21 +70,36 @@ if (empty($questions)) {
             echo "correct_answer is empty";
             exit();
         }
+
+        $correct_answer = $question['correct_answer'];
+
+        if (!isset($question['answers'])) {
+            echo "answers is not set";
+            exit();
+        }
+
+        if (empty($question['answers'])) {
+            echo "answers is empty";
+            exit();
+        }
+
+        if (count($question['answers']) < 2) {
+            echo "answers is less than 2";
+            exit();
+        }
+
         $answers = $question['answers'];
+        
+        $question_id = insert_question($title, $quiz_id);
 
         foreach ($answers as $index => $answer) {
+            if (empty($answer)) {
+                echo "answer is empty";
+                exit();
+            }
             insert_answer($answer, $question_id, $correct_answer == $index ? 1 : 0);
         }
     }
-}
-if (!isset($_POST['answers'])) {
-    echo "answers is not set";
-    exit();
-}
-$answers = $_POST['answers'];
-if (empty($answers)) {
-    echo "answers is empty";
-    exit();
 }
 
 header('Location: ../../dashboard.php');
