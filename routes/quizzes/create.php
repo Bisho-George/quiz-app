@@ -34,6 +34,7 @@ if (empty($descr)) {
     echo "descr is empty";
     exit();
 }
+
 $quiz_id = insert_quiz($title, $descr, $username);
 if (!$quiz_id) {
     echo "Failed to insert quiz";

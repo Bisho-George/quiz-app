@@ -10,7 +10,7 @@
 <body>
     <p>
         <?php
-        require_once "utilities.php";
+        require_once __DIR__ . "/utilities.php";
 
         key_exists('error', $_GET) ? print $error_messsages[$_GET['error']] : print '';
         ?>
@@ -22,7 +22,7 @@
         <input required type="password" placeholder="password" name="password">
         <button type="submit">login</button>
     </form>
-    <a href="register.php">don't have an account? click here to register.</a>
+    <a href="/register">don't have an account? click here to register.</a>
 </body>
 
 </html>

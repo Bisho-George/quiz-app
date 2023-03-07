@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../database/functions/users_functions.php";
+require_once __DIR__ . "/../../database/functions/users_functions.php";
 
 // error_log(print_r($_POST, TRUE), 0);
 
@@ -9,7 +9,7 @@ $password = $_POST["password"];
 
 // Make sure username and password are not empty
 if (empty($username) || empty($password)) {
-    header("Location: ../../login.php?error=emptyFields&username=" . $username);
+    header("Location: /login?error=emptyFields&username=" . $username);
     // Stop the script
     exit();
 }
@@ -17,7 +17,7 @@ if (empty($username) || empty($password)) {
 $found_user = select_user_by_username_and_password($username, $password);
 
 if (!$found_user) {
-    header("Location: ../../login.php?error=invalidUser&username=" . $username);
+    header("Location: /login?error=invalidUser&username=" . $username);
     exit();
 }
 
@@ -26,5 +26,5 @@ session_start();
 
 $_SESSION["username"] = $username;
 
-header("Location: ../../dashboard.php");
+header("Location: /");
 exit();
