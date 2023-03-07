@@ -34,6 +34,7 @@ if (empty($descr)) {
     echo "descr is empty";
     exit();
 }
+
 $quiz_id = insert_quiz($title, $descr, $username);
 if (!$quiz_id) {
     echo "Failed to insert quiz";
@@ -49,33 +50,57 @@ if (empty($questions)) {
     exit();
 } else {
     foreach ($questions as $question) {
-        $title = $question['question'];
+        if (!isset($question['question'])) {
+            echo "question is not set";
+            exit();
+        }
 
-        $question_id = insert_question($title, $quiz_id);
+        if (empty($question['question'])) {
+            echo "question is empty";
+            exit();
+        }
+
+        $title = $question['question'];
+        
         if (!isset($question['correct_answer'])) {
             echo "correct_answer is not set";
             exit();
         }
-        $correct_answer = $question['correct_answer'];
+
         if (empty($question['correct_answer'])) {
             echo "correct_answer is empty";
             exit();
         }
+
+        $correct_answer = $question['correct_answer'];
+
+        if (!isset($question['answers'])) {
+            echo "answers is not set";
+            exit();
+        }
+
+        if (empty($question['answers'])) {
+            echo "answers is empty";
+            exit();
+        }
+
+        if (count($question['answers']) < 2) {
+            echo "answers is less than 2";
+            exit();
+        }
+
         $answers = $question['answers'];
+        
+        $question_id = insert_question($title, $quiz_id);
 
         foreach ($answers as $index => $answer) {
+            if (empty($answer)) {
+                echo "answer is empty";
+                exit();
+            }
             insert_answer($answer, $question_id, $correct_answer == $index ? 1 : 0);
         }
     }
-}
-if (!isset($_POST['answers'])) {
-    echo "answers is not set";
-    exit();
-}
-$answers = $_POST['answers'];
-if (empty($answers)) {
-    echo "answers is empty";
-    exit();
 }
 
 header('Location: ../../dashboard.php');

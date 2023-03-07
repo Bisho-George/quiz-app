@@ -1,9 +1,9 @@
 <?php
 
-require_once "utilities.php";
+require_once __DIR__ . "/utilities.php";
 
 if (!is_authenticated()) {
-    header('Location: index.php');
+    header('Location: /login');
     exit();
 }
 
@@ -22,7 +22,7 @@ if (!is_authenticated()) {
     <h2>
         Hey, <?php print $_SESSION['username'] ?>
     </h2>
-    <a href="createQuiz/create_quiz.php">Create a quiz</a>
+    <a href="/create">Create a quiz</a>
 </body>
 
 </html>

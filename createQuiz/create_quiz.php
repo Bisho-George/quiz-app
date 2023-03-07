@@ -1,9 +1,9 @@
 <?php
 
-require_once "../utilities.php";
+require_once __DIR__ . "/../utilities.php";
 
 if (!is_authenticated()) {
-    header('Location: index.php');
+    header('Location: /');
     exit();
 }
 
@@ -29,7 +29,8 @@ if (!is_authenticated()) {
         </div>
         <button type="submit">create</button>
     </form>
-    <script src="./create_quiz.js"></script>
+    <script>
+        <?php include('create_quiz.js'); ?>
     </script>
 </body>
 
