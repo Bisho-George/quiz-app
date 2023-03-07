@@ -49,14 +49,23 @@ if (empty($questions)) {
     exit();
 } else {
     foreach ($questions as $question) {
-        $title = $question['question'];
+        if (!isset($question['question'])) {
+            echo "question is not set";
+            exit();
+        }
 
-        $question_id = insert_question($title, $quiz_id);
+        if (empty($question['question'])) {
+            echo "question is empty";
+            exit();
+        }
+
+        $title = $question['question'];
+        
         if (!isset($question['correct_answer'])) {
             echo "correct_answer is not set";
             exit();
         }
-        $correct_answer = $question['correct_answer'];
+
         if (empty($question['correct_answer'])) {
             echo "correct_answer is empty";
             exit();
