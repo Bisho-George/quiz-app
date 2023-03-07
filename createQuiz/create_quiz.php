@@ -20,18 +20,38 @@ if (!is_authenticated()) {
 
 <body>
     <h1>Create a quiz</h1>
-    <form action="../routes/quizzes/create.php" method="post">
+    <form method="post" id="quiz-form">
         <input type="text" name="title" placeholder="quiz title">
         <textarea name="descr" cols="30" rows="10" placeholder="quiz description"></textarea>
         <div>
             <ul id="questions"></ul>
-            <button id="addQuestion">add question</button>
+            <button type="button" id="addQuestion">add question</button>
         </div>
         <button type="submit">create</button>
+        <div id="message"></div>
     </form>
     <script>
-        <?php include('create_quiz.js'); ?>
+        <?php
+        include('create_quiz.js');
+        ?>
     </script>
 </body>
 
 </html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validate form data
+    $title = $_POST['title'] ?? '';
+    $descr = $_POST['descr'] ?? '';
+    $questions = $_POST['questions'] ?? '';
+    $answers = $_POST['answers'] ?? '';
+
+    if (empty($title) || empty($descr) || empty($questions) || empty($answers)) {
+        $response = array('success' => false, 'message' => 'All fields are required.');
+    } else {
+        // Perform further validation and processing as needed
+        // ...
+        $response = array('success' => true);
+    }
+    exit;
+}

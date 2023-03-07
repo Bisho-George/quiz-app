@@ -7,7 +7,6 @@ use AltoRouter;
 
 
 // Routing
-
 $router = new AltoRouter();
 
 $router->map('GET', '/', function() {
@@ -27,7 +26,7 @@ $router->map('GET', '/create', function() {
 });
 
 $router->map('POST', '/create', function() {
-    
+    include ('createQuiz/validateInputs.php');
 });
 
 $router->map('POST', '/quiz/[i:id]', function($id) {
