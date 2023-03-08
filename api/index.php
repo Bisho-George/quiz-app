@@ -1,40 +1,27 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . "/utilities.php";
-
-use AltoRouter;
-
-
-// Routing
+require __DIR__ . '/' . 'vendor/autoload.php';
 
 $router = new AltoRouter();
 
-$router->map('GET', '/', function() {
-    include('dashboard.php');
+$router->map('POST', '/login', function () {
+    include(__DIR__ . '/' . 'routes/auth/login.php');
 });
 
-$router->map('GET', '/register', function() {
-    include('register.php');
+$router->map('POST', '/register', function () {
+    include(__DIR__ . '/' . 'routes/auth/register.php');
 });
 
-$router->map('GET', '/login', function() {
-    include('login.php');
+
+$router->map('POST', '/create', function () {
+    include(__DIR__ . '/' . 'routes/quizzes/create.php');
 });
 
-$router->map('GET', '/create', function() {
-    include('createQuiz/create_quiz.php');
-});
-
-$router->map('POST', '/create', function() {
-    
-});
-
-$router->map('POST', '/quiz/[i:id]', function($id) {
-    
+$router->map('POST', '/' . 'quiz/[i:id]', function ($id) {
 });
 
 $match = $router->match();
+
 if ($match && is_callable($match['target'])) {
     call_user_func_array($match['target'], $match['params']);
 } else {
