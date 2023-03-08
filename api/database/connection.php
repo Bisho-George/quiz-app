@@ -1,0 +1,20 @@
+<?php
+
+require_once __DIR__.'/../env.php';
+
+$host = "localhost";
+$user = $_ENV["DB_USERNAME"];
+$password = $_ENV['DB_PASSWORD'];
+$db_name = "quiz";
+
+// Create connection
+$conn = mysqli_connect($host, $user, $password, $db_name);
+
+// error_log(print_r($conn, true), 0);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    error_log("Connected successfully", 0);
+}
