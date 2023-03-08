@@ -1,23 +1,19 @@
 <?php
 
-require_once __DIR__ . "/../../database/functions/users_functions.php";
+require_once __DIR__ . '/' . '../../database/functions/users_functions.php';
+require_once __DIR__ . '/' . '../../utilities.php';
 
-// error_log(print_r($_POST, TRUE), 0);
+$body = get_request_body();
 
-$username = $_POST["username"];
-$password = $_POST["password"];
-
-// Make sure username and password are not empty
-if (empty($username) || empty($password)) {
-    header("Location: /login?error=emptyFields&username=" . $username);
-    // Stop the script
-    exit();
-}
+$username = ensure_exists($body, "username");
+$password = ensure_exists($body, "password");
 
 $found_user = select_user_by_username_and_password($username, $password);
 
 if (!$found_user) {
-    header("Location: /login?error=invalidUser&username=" . $username);
+    json_response(array(
+        "message" => "Incorrect username or password"
+    ), 400);
     exit();
 }
 
@@ -26,5 +22,6 @@ session_start();
 
 $_SESSION["username"] = $username;
 
-header("Location: /");
-exit();
+json_response(array(
+    "message" => "Login successful"
+));
